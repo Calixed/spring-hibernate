@@ -1,5 +1,5 @@
-# one-to-one-hibernate-java-demo
-- simple java project that demonstrate one-to-one bi directional hibernate
+# one-to-many-hibernate-java-demo
+- simple java project that demonstrate one-to-many hibernate
 - it needs to run the mysql script first to build the database schema and set up the tables
 
 
