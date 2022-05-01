@@ -20,12 +20,13 @@ public class InstructorDetail {
 
 
     // add new field for instructor
+    // BI-DIRECTIONAL NOTES:
     // Note: this is referenced in the instructor class that we have instructorDetail object to call this class
     // we're just gonna do the same thing so we can call instructorDetail then instructor or Instructor first then instructorDetail
     // this will be temporary, to demo the deleting instructorDetail object will only delete itself and not associating entity
     //
     @OneToOne(mappedBy = "instructorDetail",
-            cascade = {CascadeType.DETACH,CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Instructor instructor;
 
     // no args constructor

@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity // noted that this is an entity in our database
 @Table(name = "instructor") // name of the table
@@ -19,12 +20,18 @@ public class Instructor {
     @Column(name = "email")
     private String email;
 
+    // ---------------------------------------------------------------- //
     // Connecting the two tables/class together
     // set mapping between instructor and instructorDetail entity
     // NOTE: This is a column in the table in the database (set as schema) during running the script
     @OneToOne(cascade = CascadeType.ALL)// important!!
     @JoinColumn(name = "instructor_detail_id") // this is our foreign key
     private InstructorDetail instructorDetail; // object
+
+    // ---------------------------------------------------------------- //
+    @OneToMany(mappedBy = "instructor")
+    private List<Course> courseList;
+
 
     // no argument constructor
     public Instructor() {
