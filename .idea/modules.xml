@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/one-to-many-hibernate.iml" filepath="$PROJECT_DIR$/.idea/one-to-many-hibernate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/one-to-many-hibernate-bi.iml" filepath="$PROJECT_DIR$/.idea/one-to-many-hibernate-bi.iml" />
     </modules>
   </component>
 </project>

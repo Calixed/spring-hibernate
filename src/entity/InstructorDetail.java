@@ -9,7 +9,7 @@ public class InstructorDetail {
 
     @Id // primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // set as auto-increment
-    @Column(name = "id")
+    @Column(name = "id") // name of the column in the database
     private int id;
 
     @Column(name = "youtube_channel") // name of the column in database
@@ -18,18 +18,38 @@ public class InstructorDetail {
     @Column(name = "hobby")
     private String hobby;
 
-    public InstructorDetail() {
 
+    // add new field for instructor
+    // Note: this is referenced in the instructor class that we have instructorDetail object to call this class
+    // we're just gonna do the same thing so we can call instructorDetail then instructor or Instructor first then instructorDetail
+    // this will be temporary, to demo the deleting instructorDetail object will only delete itself and not associating entity
+    //
+    @OneToOne(mappedBy = "instructorDetail",
+            cascade = {CascadeType.DETACH,CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private Instructor instructor;
+
+    // no args constructor
+    public InstructorDetail() {
     }
 
     // constructors with argument
     public InstructorDetail(String youtubeChannel, String hobby) {
         this.youtubeChannel = youtubeChannel;
         this.hobby = hobby;
+        // we can automatically pass the instructor detail object
+        System.out.println("Object Instructor Detail has been made!");
     }
 
 
     // setter and getter methods
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
     public int getId() {
         return id;
     }

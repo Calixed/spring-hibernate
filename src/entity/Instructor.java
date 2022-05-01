@@ -10,10 +10,10 @@ public class Instructor {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "firstName") // name of our column
+    @Column(name = "first_name") // name of our column
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "email")
@@ -21,10 +21,10 @@ public class Instructor {
 
     // Connecting the two tables/class together
     // set mapping between instructor and instructorDetail entity
-    // NOTE: This is a column in the table in the database during running the script
-    @OneToOne(cascade = CascadeType.ALL)
+    // NOTE: This is a column in the table in the database (set as schema) during running the script
+    @OneToOne(cascade = CascadeType.ALL)// important!!
     @JoinColumn(name = "instructor_detail_id") // this is our foreign key
-    private InstructorDetail instructorDetail;
+    private InstructorDetail instructorDetail; // object
 
     // no argument constructor
     public Instructor() {
