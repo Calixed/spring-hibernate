@@ -114,14 +114,13 @@ public class Instructor {
         if (courseList == null){
             courseList = new ArrayList<>();
         }
-
         // add it in to the list of courses
         courseList.add(tempCourse);
 
         // since this is bi-directional relationship
         // here is your new Instructor, referencing the course that this is the Actual Instructor
+        // tempCourse is an object of Courses
         tempCourse.setInstructor(this);
-
     }
 
 }
