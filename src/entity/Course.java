@@ -5,8 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "course")
 public class Course {
-
-    // annotate field
     @Id // marks as the primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // this makes the id auto increment every transaction
     @Column(name = "id") // name of the table
@@ -16,7 +14,7 @@ public class Course {
     private String title;
 
     // Join column, knows we set up course how to find its instructor
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
     @JoinColumn(name = "instructor_id")
     // NOTE: instructor_id is in the course table with the same name as the column that has the key that points back to the actual instructor
     private Instructor instructor;
@@ -46,10 +44,13 @@ public class Course {
         this.title = title;
     }
 
+
+    // setter and getter for Instructor class
     public Instructor getInstructor() {
         return instructor;
     }
 
+    // sets as the new instructor everytime a new courses is added to an Instructor
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
     }

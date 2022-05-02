@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity // noted that this is an entity in our database
@@ -29,7 +30,10 @@ public class Instructor {
     private InstructorDetail instructorDetail; // object
 
     // ---------------------------------------------------------------- //
-    @OneToMany(mappedBy = "instructor")
+    // "mappedBy = instructor'  " refers to "instructor" property in "Course.class"
+    // did not apply cascading delete
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
+            mappedBy = "instructor")
     private List<Course> courseList;
 
 
@@ -95,5 +99,29 @@ public class Instructor {
                 + ", instructorDetail=" + instructorDetail + "]";
     }
 
+    // setter and getters or course list
+    public List<Course> getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
+    }
+
+    // convenience method for bi-directional relationship between instructors and courses
+    // we want start with Instructor, go to Course or start with course , go to Instructor
+    public void add(Course tempCourse){
+        if (courseList == null){
+            courseList = new ArrayList<>();
+        }
+
+        // add it in to the list of courses
+        courseList.add(tempCourse);
+
+        // since this is bi-directional relationship
+        // here is your new Instructor, referencing the course that this is the Actual Instructor
+        tempCourse.setInstructor(this);
+
+    }
 
 }
