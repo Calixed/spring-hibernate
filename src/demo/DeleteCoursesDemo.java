@@ -9,7 +9,7 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
-public class GetInstructorCoursesDemo {
+public class DeleteCoursesDemo {
 
     public static void main(String[] args) {
         // heavy weight object ONLY CREATE ONCE
@@ -27,19 +27,14 @@ public class GetInstructorCoursesDemo {
             // start transaction
             session.beginTransaction();
 
-            // get the instructor from database
-            int theId = 1;
-            Instructor tempInstructor = session.get(Instructor.class, theId);
+            // get a course id
+            int courseID = 2;
 
-            // since TempInstructor is associated with Course via MappedBy, we can just call it in the Object
-            System.out.println("Instructors Name: "+ tempInstructor.getFirstName() + " "+ tempInstructor.getLastName());
-            System.out.println("Courses: ");
-            List<Course> tempList = tempInstructor.getCourseList();
+            // retrieve the object from db
+            Course tempCourse = session.get(Course.class, courseID);
 
-            // printing it
-            for(Course  x: tempList){
-                System.out.println(x.getTitle());
-            }
+            // delete course
+            session.delete(tempCourse);
 
             // commit the transaction
             session.getTransaction().commit();
