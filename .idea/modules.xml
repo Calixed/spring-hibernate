@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/one-to-many-hibernate-bi.iml" filepath="$PROJECT_DIR$/.idea/one-to-many-hibernate-bi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eager-vs-lazy-demo.iml" filepath="$PROJECT_DIR$/eager-vs-lazy-demo.iml" />
     </modules>
   </component>
 </project>
