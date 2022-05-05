@@ -31,11 +31,12 @@ public class Instructor {
 
     // ---------------------------------------------------------------- //
     // "mappedBy = instructor'  " refers to "instructor" property in "Course.class"
-    // did not apply cascading delete
-    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
+    // NEW NOTE: FetchType.eager will load the instructor and also load the courses at the same time
+    // NEW NOTE: change the fetchType. To LAZY meaning it will call the course data when it is needed
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
             mappedBy = "instructor")
     private List<Course> courseList;
-
 
     // no argument constructor
     public Instructor() {

@@ -7,7 +7,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class CreateCourseDemo {
+import java.util.List;
+
+public class EagerLazyDemo {
 
     public static void main(String[] args) {
         // heavy weight object ONLY CREATE ONCE
@@ -26,29 +28,31 @@ public class CreateCourseDemo {
             session.beginTransaction();
 
             // get the instructor from database
-            // to get the id, get the primary key first
             int theId = 1;
             Instructor tempInstructor = session.get(Instructor.class, theId);
 
-            // create some courses
-            Course tempCourse1 = new Course("Java Enterprise I");
-            Course tempCourse2 = new Course("Java Enterprise II");
+            // since TempInstructor is associated with Course via MappedBy, we can just call it in the Object
+            System.out.println("Instructors Name: "+ tempInstructor.getFirstName() + " "+ tempInstructor.getLastName());
 
-            // add courses to instructor
-            // this is where we will be call the course.setInstructor()
-            tempInstructor.add(tempCourse1);
-            tempInstructor.add(tempCourse2);
+            // get the courses for the instructor
+            System.out.println("\n\nCourses: " + tempInstructor.getCourseList()); // this is our lazy data
+            List<Course> tempList = tempInstructor.getCourseList();
 
-            // save courses
-            session.save(tempCourse1);
-            session.save(tempCourse2);
+            // printing it
+            for(Course  x: tempList){
+                System.out.println(x.getTitle());
+            }
 
             // commit the transaction
             session.getTransaction().commit();
-            System.out.println("");
-            System.out.println("Done!");
-        } finally {
             session.close();
+            // few notes: This will throw an lazy exception error when we call the getCourseList if we didnt called it before the session is closed.
+            // SOLUTION: to prevent this we should call the getter method first before closing the
+            // Now, we can call the lazy data since it has already been loaded to our application
+            System.out.println("\n\nCourses: " + tempInstructor.getCourseList()); // this is our lazy data
+            System.out.println("\nDone!");
+        } finally {
+
             factory.close();
         }
 
